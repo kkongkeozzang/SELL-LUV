@@ -140,3 +140,9 @@ $RECYCLE.BIN/
 
 # ignore all files in the build/ directory
 build/
+
+# OS Generated Files #
+######################
+**/.DS_Store
+**/._*
+...
