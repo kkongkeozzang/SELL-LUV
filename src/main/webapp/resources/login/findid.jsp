@@ -6,7 +6,7 @@
 <html lang="en" dir="ltr">
    <head>
       <meta charset="utf-8">
-      <title>비밀번호 찾기</title>
+      <title>아이디 찾기</title>
  <!--  <link rel="stylesheet" href="style.css">   -->
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -224,8 +224,32 @@ form .btn input[type="button"]{
     transition: all 0.3s ease;
     border-radius: 5px;
 }
-.check-text-box{
-	
+.formed-div{
+  height: 50%;
+  width: 100%;
+  outline: none;
+  margin-top:15px;
+  border-radius: 5px;
+  border: 1px solid lightgrey;
+  border-bottom-width: 2px;
+  font-size: 17px;
+  transition: all 0.3s ease;
+  position:relative;
+}
+.id-result{
+	font-size: 30px;
+	text-align:center;
+	position:absolute;
+	top:50%;
+	left:50%;
+	transform:translate(-50%, -50%);
+}
+.formed-detail-div{
+	margin:20px 0;
+}
+.id-result-important{
+	color:rgba(255, 111, 97);
+	font-size:40px;
 }
       </style>
    </head>
@@ -235,10 +259,10 @@ form .btn input[type="button"]{
       <div class="wrapper">
          <div class="title-text">
             <div class="title">
-               비밀번호 찾기
+               아이디 찾기
             </div>
             <div class="title">
-               비밀번호 찾기
+               아이디 찾기
             </div>
             <div class="login"style="display:hidden"></div>
          </div>
@@ -249,9 +273,9 @@ form .btn input[type="button"]{
                <div class="slider-tab"></div>
             </div>
             <div class="form-inner">
-               <form action="/companyFindpw.mem" method="post" class="login" id="cp-frm">
+               <form method="post" class="login" id="cp-frm">
                   <div class="field">
-                     <input type="text" name="id_cp" placeholder="아이디를 입력하세요." id="id_cp" required>
+                     <input type="text" name="email_cp" placeholder="이메일을 입력하세요." id="email_cp" required>
                   </div>
                   <div class="field">
                      <input type="text" name="name_cp" placeholder="이름을 입력하세요." id="name_cp" required>
@@ -268,23 +292,23 @@ form .btn input[type="button"]{
                  <div class="field">
                      <input type="text" name="answer-cp" placeholder="본인 확인 문구의 답을 입력하세요." id="check-answer-cp" required>
                   </div>
-                  <div class="pass-link" >
-                     <a href="/findid.mem" class="idCheckSpan">아이디를 잊으셨습니까..?</a>
-                  </div>
                 
-                  <div class="field btn">
+                  <div class="field btn btn-cp" id="cp-findpw-box">
                      <div class="btn-layer"></div>
-                     <input type="button" value="비밀번호 찾기" id="cp_findpw" class="">
+                     <input type="button" value="아이디 찾기" id="cp_findpw" class="">
+                  </div>
+                  <div class="field btn btn-cp" id="btn-cp-box" style="display:none;">
+                     <div class="btn-layer"></div>
+                     <input type="button" value="로그인 하러 가기" id="btn-cp" class="">
                   </div>
                   <div class="signup-link">
                      회원이 아니세요? <a href="/resources/signup/selectSignup.jsp">회원가입</a>
                   </div>
                </form>
-               
-               <!-- 인플루언서 회원 칸 -->
-               <form action="/influencerFindpw.mem" class="signup" method="post" id="if-frm">
+               <!-- 인플루언서 칸 -->
+               <form class="signup" method="post" id="if-frm">
                   <div class="field">
-                     <input type="text" name="id_if" id="id_if" placeholder="아이디를 입력하세요." required>
+                     <input type="text" name="email_if" id="email_if" placeholder="이메일을 입력하세요." required>
                   </div>
                   <div class="field">
                      <input type="text" name="name_if" id="name_if" placeholder="이름을 입력하세요." required>
@@ -301,106 +325,15 @@ form .btn input[type="button"]{
                  <div class="field">
                      <input type="text" name="answer-if" placeholder="본인 확인 문구의 답을 입력하세요." id="check-answer-if" required>
                   </div>
-                  <div class="pass-link">
-                    <a href="/findid.mem" class="idCheckSpan">아이디를 잊으셨습니까..?</a>
-                 </div>
                 
                  
-                  <div class="field btn">
+                  <div class="field btn btn-if">
                      <div class="btn-layer"></div>
-                     <input type="button" value="비밀번호 찾기" id="if_findpw" class="">
-                     <script>
-                     	// 기업
-	                  	let isCPMember = function() {
-	                     	let id = $("#id_cp").val();
-	                     	let name = $("#name_cp").val();
-	                     	let text = $("#check-text-cp").val();
-	                     	let answer = $("#check-answer-cp").val();
-		                  	$.ajax({
-	               				url:"/isCPMember.mem",
-	               				type:"post",
-	               				data:{
-	               					id:id,
-	               					name:name,
-	               					text:text,
-	               					answer:answer
-	               				}
-	               			})
-	               			.done(function(resp){
-	               					console.log(resp);
-	               				if(resp=="false"){
-	               					alert("일치하는 정보의 회원이 존재하지 않습니다.");
-	               					$("#id_cp").val("");
-	               					$("#name_cp").val("");
-	               					let answer = $("#check-answer-cp").val("");
-	               					return false;
-	               				}else {
-        	                  		if($("#check-text-cp").val()== "본인 확인 문구를 선택해주세요.") {
-        	                  			alert("본인 확인 문구를 선택해주세요.");
-        	                  			return false;
-        	                  		}else{
-        	                  			$("#cp-frm").submit();
-        	                  		}
-	               				}
-	               			});
-	                    }
-                     	 $("#cp_findpw").on("click",isCPMember);
-	                    // 인플루언서 
-                     	$("#if_findpw").on("click",function(){
-                     		if($("#check-text-if").val()== "본인 확인 문구를 선택해주세요.") {
-                     			alert("본인 확인 문구를 선택해주세요.");
-                     			return false;
-                     		}else{
-                     			$("#if-frm").submit();
-                     		}
-                     		
-                     	})
-                     	
-                     	let isIFMember = function() {
-	                     	let id = $("#id_if").val();
-	                     	let name = $("#name_if").val();
-	                     	let text = $("#check-text-if").val();
-	                     	let answer = $("#check-answer-if").val();
-		                  	$.ajax({
-	               				url:"/isIFMember.mem",
-	               				type:"post",
-	               				data:{
-	               					id:id,
-	               					name:name,
-	               					text:text,
-	               					answer:answer
-	               				}
-	               			})
-	               			.done(function(resp){
-	               					console.log(resp);
-	               				if(resp=="false"){
-	               					alert("일치하는 정보의 회원이 존재하지 않습니다.");
-	               					$("#id_if").val("");
-	               					$("#name_if").val("");
-	               					let answer = $("#check-answer-if").val("");
-	               					return false;
-	               				}else {
-        	                  		if($("#check-text-if").val()== "본인 확인 문구를 선택해주세요.") {
-        	                  			alert("본인 확인 문구를 선택해주세요.");
-        	                  			return false;
-        	                  		}else{
-        	                  			$("#if-frm").submit();
-        	                  		}
-	               				}
-	               			});
-	                    }
-                     	 $("#if_findpw").on("click",isIFMember);
-	                     
-                     	$("#if_findpw").on("click",function(){
-                     		if($("#check-text-if").val()== "본인 확인 문구를 선택해주세요.") {
-                     			alert("본인 확인 문구를 선택해주세요.");
-                     			return false;
-                     		}else{
-                     			$("#if-frm").submit();
-                     		}
-                     		
-                     	})
-                     </script>
+                     <input type="button" value="아이디 찾기" id="if_findpw" class="">
+                  </div>
+                  <div class="field btn btn-if" id="btn-if-box" style="display:none;">
+                     <div class="btn-layer"></div>
+                     <input type="button" value="로그인 하러 가기" id="btn-if" class="">
                   </div>
                </form>
             </div>
@@ -414,22 +347,186 @@ form .btn input[type="button"]{
       <div id="errorMessage" style="display:hidden">${errorMessage}</div>
       
       <script>
+      // 토글 기능
       console.log('${result}'); 
          const loginText = document.querySelector(".title-text .login");
          const loginForm = document.querySelector("form.login");
          const loginBtn = document.querySelector("label.login");
          const signupBtn = document.querySelector("label.signup");
          const signupLink = document.querySelector("form .signup-link a");
-         signupBtn.onclick = (()=>{
-           loginForm.style.marginLeft = "-50%";
-           loginText.style.marginLeft = "-50%";
-         });
-         loginBtn.onclick = (()=>{
-           loginForm.style.marginLeft = "0%";
-           loginText.style.marginLeft = "0%";
-         });
-        
+         let toIF = function() {
+        	 loginForm.style.marginLeft = "-50%";
+             loginText.style.marginLeft = "-50%";
+         };
+         let toCP = function(){
+        	 loginForm.style.marginLeft = "0%";
+             loginText.style.marginLeft = "0%";
+         }
+         loginBtn.addEventListener("click",toCP);
+         signupBtn.addEventListener("click",toIF);
          
+         // 기업 동작
+         let isCPidExist = function() {
+          	let email = $("#email_cp").val();
+          	let name = $("#name_cp").val();
+          	let text = $("#check-text-cp").val();
+          	let answer = $("#check-answer-cp").val();
+           	$.ajax({
+    				url:"/isCPidExist.mem",
+    				type:"post",
+    				data:{
+    					email:email,
+    					name:name,
+    					text:text,
+    					answer:answer
+    				}
+    			})
+    			.done(function(resp){
+    				if(resp=="null"){
+    					if($("#check-text-cp").val()== "본인 확인 문구를 선택해주세요.") {
+               			alert("본인 확인 문구를 선택해주세요.");
+               			return false;
+               		}
+    					alert("일치하는 정보의 회원이 존재하지 않습니다.");
+    					$("#email_cp").val("");
+    					$("#name_cp").val("");
+    					let answer = $("#check-answer-cp").val("");
+    					return false;
+    				}else{
+    					console.log(resp);
+    					$("#email_cp").css("display","none");
+    					$("#name_cp").css("display","none");
+    					$("#check-text-cp").css("display","none");
+    					$("#check-answer-cp").css("display","none");
+    					let div = $("<div>");
+    					div.addClass("formed-div");
+    					$("#cp-frm").prepend(div);
+    					let btn = $("#btn-cp-box");
+    					div.after(btn);
+    					let text = $("<div>");
+    					text.addClass("id-result");
+    					let s1 = $("<div>");
+    					s1.addClass("formed-detail-div");
+    					s1.append("당신의 ID는<br>");
+    					let s2 = $("<div>");
+    					s2.addClass("id-result-important");
+    					s2.addClass("formed-detail-div");
+    					s2.append(resp+"<br>");
+    					let s3 = $("<div>");
+    					s3.append("입니다.");
+    					s3.addClass("formed-detail-div");
+    					text.append(s1);
+    					text.append(s2);
+    					text.append(s3);
+    					div.append(text);
+    					$("#cp-findpw-box").css("display","none");
+    					$("#btn-cp-box").css("display","inline-block");
+    					$(".wrapper").css("height","470px");
+    					$("#btn-cp-box").on("click",function(){
+    						location.href="/login.mem";
+    					});
+    				}
+    			});
+           	loginBtn.removeEventListener("click",toCP);
+            signupBtn.removeEventListener("click",toIF);
+            $(".slide.login").css("cursor","default");
+            $(".slide.signup").css("cursor","default");
+            
+         }
+      	 $("#cp_findpw").on("click",isCPidExist);
+      	 
+      	 
+      	 // 인플루언서 동작
+      	let isIFidExist = function() {
+          	let email = $("#email_if").val();
+          	let name = $("#name_if").val();
+          	let text = $("#check-text-if").val();
+          	let answer = $("#check-answer-if").val();
+           	$.ajax({
+    				url:"/isIFidExist.mem",
+    				type:"post",
+    				data:{
+    					email:email,
+    					name:name,
+    					text:text,
+    					answer:answer
+    				}
+    			})
+    			.done(function(resp){
+    				if(resp=="null"){
+    					if($("#check-text-if").val()== "본인 확인 문구를 선택해주세요.") {
+               			alert("본인 확인 문구를 선택해주세요.");
+               			return false;
+               		}
+    					alert("일치하는 정보의 회원이 존재하지 않습니다.");
+    					$("#email_if").val("");
+    					$("#name_if").val("");
+    					let answer = $("#check-answer-if").val("");
+    					return false;
+    				}else{
+    					console.log(resp);
+    					$("#email_if").css("display","none");
+    					$("#name_if").css("display","none");
+    					$("#check-text-if").css("display","none");
+    					$("#check-answer-if").css("display","none");
+    					let div = $("<div>");
+    					div.addClass("formed-div");
+    					$("#if-frm").prepend(div);
+    					let btn = $("#btn-if-box");
+    					div.after(btn);
+    					let text = $("<div>");
+    					text.addClass("id-result");
+    					let s1 = $("<div>");
+    					s1.addClass("formed-detail-div");
+    					s1.append("당신의 ID는<br>");
+    					let s2 = $("<div>");
+    					s2.addClass("id-result-important");
+    					s2.addClass("formed-detail-div");
+    					s2.append(resp+"<br>");
+    					let s3 = $("<div>");
+    					s3.append("입니다.");
+    					s3.addClass("formed-detail-div");
+    					text.append(s1);
+    					text.append(s2);
+    					text.append(s3);
+    					div.append(text);
+    					$("#if-findpw-box").css("display","none");
+    					$("#btn-if-box").css("display","inline-block");
+    					$(".wrapper").css("height","470px");
+    					$("#btn-if-box").on("click",function(){
+    						location.href="/login.mem";
+    					});
+    				}
+    			});
+           	loginBtn.removeEventListener("click",toCP);
+            signupBtn.removeEventListener("click",toIF);
+            $(".slide.login").css("cursor","default");
+            $(".slide.signup").css("cursor","default");
+            
+         }
+      	 $("#if_findpw").on("click",isIFidExist);
+      	<%--
+      	$("#if_findpw").on("click",function(){
+      		if($("#check-text-if").val()== "본인 확인 문구를 선택해주세요.") {
+      			alert("본인 확인 문구를 선택해주세요.");
+      			return false;
+      		}else{
+      			$("#if-frm").submit();
+      		}
+      		
+      	})
+      	 
+          
+      	$("#if_findpw").on("click",function(){
+      		if($("#check-text-if").val()== "본인 확인 문구를 선택해주세요.") {
+      			alert("본인 확인 문구를 선택해주세요.");
+      			return false;
+      		}else{
+      			$("#if-frm").submit();
+      		}
+      		
+      	})
+         --%>
          // 로그인 유효성 검사..
        
          $('#errorMessage')[0].innerText && alert($('#errorMessage')[0].innerText);

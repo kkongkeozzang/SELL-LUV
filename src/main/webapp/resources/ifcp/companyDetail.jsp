@@ -31,73 +31,72 @@
 
 <body>
 	<jsp:include page="/header.jsp" flush="false" />
+
 	<div class="blog-single gray-bg">
 		<div class="container">
 			<div class="row align-items-start">
 				<div class="col-lg-8 m-15px-tb">
 					<article class="article">
 						<div class="article-img">
+							<c:forEach var="dto" items="${cpList }">
+								<img src="${dto.key.photo_cp}" title="" alt="">
 						</div>
 						<div class="article-title">
 							<!--소개글-->
 							<div class="avatar"></div>
-							<h2>${cpList[0].title_cp}</h2>
+							<h2>${dto.key.title_cp}</h2>
 							<div class="media">
-							<div class="avatar"></div>
+								<div class="avatar"></div>
 								<div class="media-body">
-									<label>작성자 : </label> ${cpList[0].writer_cp}
+									<label>작성자 : </label> ${dto.value.id}
 								</div>
 								<div class="media-body">
-									<label>작성일 : </label> ${cpList[0].write_date_cp}
+									<label>매출 : </label> ${dto.value.sales}
 								</div>
 								<div class="media-body">
-									<label>조회수 : </label> ${cpList[0].view_count_cp}
+									<label>소개 : </label> ${dto.key.intro_cp}
 								</div>
 							</div>
 							<br>
 							<div class="media">
 								<div class="avatar"></div>
 								<div class="media-body">
-									<label>원하는 조건 : </label> ${cpList[0].condition_cp}
+									<label>원하는 조건 : </label> ${dto.key.condition_cp}
 								</div>
 							</div>
 						</div>
 						<div class="article-content">
-							<p>${cpList[0].intro_cp}</p>
+							<p>${dto.key.intro_cp}</p>
 						</div>
 
 					</article>
+					
 					<div class="contact-form article-comment">
-						<h4>리뷰 작성</h4>
-						<form id="contact-form" action="/write.review" method="POST">
-							<div class="row">
-								<div class="col-md-6">
-									<div class="form-group">
-										<input name="Name" id="name" placeholder="Name *"
-											class="form-control" type="text">
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="form-group">
-										<input name="Email" id="email" placeholder="Email *"
-											class="form-control" type="email">
-									</div>
-								</div>
-								<div class="col-md-12">
-									<div class="form-group">
-										<textarea name="message" id="message" placeholder="글 남기기 *"
-											rows="4" class="form-control"></textarea>
-									</div>
-								</div>
-								<div class="col-md-12">
-									<div class="send">
-										<button class="px-btn theme">
-											<span>작성완료</span> <i class="arrow"></i>
-										</button>
-									</div>
-								</div>
+						<h4>리뷰 목록</h4>
+						<div class="row">
+							<div class="col-md-6">
+							<table class="table-sm mb-0" style="color:#ff6F61;">
+								<thead>
+									<tr>
+										<th>번호</th>
+										<th>작성자</th>
+										<th>작성내용</th>
+										<th>작성시간</th>
+									</tr>
+								</thead>
+								<tbody>
+								<c:forEach var="list" items="${list}">
+									<tr style="color:black;">
+										<td>${list }</td>
+										<td>dddddddddddddddd</td>
+										<td>dddddddddddd</td>
+										<td>ddddddddddddddddddd</td>
+									</tr>
+									</c:forEach>
+								</tbody>
+							</table>
 							</div>
-						</form>
+						</div>
 					</div>
 				</div>
 				<div class="col-lg-4 m-15px-tb blog-aside">
@@ -120,18 +119,19 @@
 						<div class="widget-title">
 							<h3>
 								받은 좋아요 <i class="fas fa-heart" id="heart"></i>
-								${cpList[0].rLike_cp}
+								${dto.key.rLike_cp}
 							</h3>
 						</div>
 						<div class="widget-title">
 							<h3>
 								보낸 좋아요 <i class="fas fa-heart" id="heart"></i>
-								${cpList[0].sLike_cp}
+								${dto.key.sLike_cp}
 							</h3>
 						</div>
+						</c:forEach>
 						<div class="widget-title">
-							<c:if test="${cpList[0].writer_cp == logInId}">
-								<a href="/iFdelete.ifcp?seq=${cpList[0].seq_cp}"><button
+							<c:if test="${loginID!=null && cpList[0].value.id == loginID}">
+								<a href="/iFdelete.ifcp?seq=${cpList[0].key.seq_cp}"><button
 										type="button">삭제하기</button></a>
 							</c:if>
 						</div>

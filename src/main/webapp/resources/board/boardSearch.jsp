@@ -161,6 +161,7 @@ select {
                 </div>
             </div>
         </div>
+        
         <div class="card-body noSearch" align=center style="font-size:30px;">${noSearch }</div>
         <script>
         	if(${boardList.size()!=0}){
@@ -235,7 +236,7 @@ select {
     	<div class="col-xl-8 col-md-12 d-none d-md-block"> 
     		<div class="row">
 		        <div class="col-4">
-		        <select class="select"><option value="title">제목</option><option value="writer">작성자</option><option value="contents">내용</option></select><input type="text" placeholder="Search..." class="input-search" style="width:70%; height:100%;">
+		        <select class="select"><option value="title">제목</option><option value="writer">작성자</option><option value="contents">내용</option></select><input type="text" class="input-search" placeholder="Search..." style="width:70%; height:100%;">
 		        </div>
 		        <div class="col-4 pl-0">
 		        <button type="button" class="btn btn-shadow btn-wide btn-primary btn-search" style="background-color:rgb(255, 111, 97); border-color:rgb(255, 111, 97);"> 
@@ -251,7 +252,7 @@ select {
         <div class="d-md-none">
         	<div class="row">
         		<div class="col-5">
-        			<select class="select"><option value="title">제목</option><option value="writer">작성자</option><option value="contents">내용</option></select><input type="text" placeholder="Search..." class="input-search" style="width:70%; height:100%;">
+        			<select class="select"><option value="title">제목</option><option value="writer">작성자</option><option value="contents">내용</option></select><input type="text" class="input-search" placeholder="Search..." style="width:70%; height:100%;">
 		        </div>
 		        <div class="col-4 pl-0">
 		        	<button type="button" class="btn btn-shadow btn-wide btn-primary btn-search" style="background-color:rgb(255, 111, 97); border-color:rgb(255, 111, 97);"> 

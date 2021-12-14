@@ -14,6 +14,14 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet" />
     <link href="${pageContext.request.contextPath}/resources/search/css/main.css" rel="stylesheet" />
 </head>
+<style>
+.choices {
+	height:100%;
+}
+.choices__list.choices__list--dropdown{
+	margin-top:0;
+}
+</style>
  <body style="overflow-y:scroll;">
  
  
@@ -22,8 +30,8 @@
 	      <form>
 	        <div class="inner-form">
 	          <div class="input-field first-wrap input-category">
-	            <div class="input-select">
-	              <select data-trigger="" name="choices-single-defaul">
+	            <div class="input-select" style="height:100%">
+	              <select data-trigger="" name="choices-single-defaul" style="height:100%;">
 	                <option>기업</option>
 	                <option>인플루언서</option>
 	              </select>

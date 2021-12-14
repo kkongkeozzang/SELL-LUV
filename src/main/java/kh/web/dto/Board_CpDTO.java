@@ -109,10 +109,9 @@ public class Board_CpDTO {
 	public void setPhoto_cp(String photo_cp) {
 		this.photo_cp = photo_cp;
 	}
-
-
-	
-
-	
-	
 }
+
+	
+
+	
+	

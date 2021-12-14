@@ -46,14 +46,16 @@
 								<div class="media">
 									<div class="avatar"></div>
 									<div class="media-body">
-										<label>제목 </label> <br> <input type="text"
+										<label>제목</label> <br> <input type="text"
 											style="width: 435px;" name="title" id="title"><br>
 										<br> <label>소개글</label><br>
 										<textarea rows="5" cols="50" name="intro" id="intro"></textarea>
 										<br> <label>원하는 조건</label><br>
-										<textarea rows="5" cols="50" name="condition" id="condition"></textarea><br><br>
-										<label id="fileUpload"> 사진선택<input type="file" name="file"
-											accept="jpg,jpeg,png" style="display:none;">
+										<textarea rows="5" cols="50" name="condition" id="condition"></textarea>
+										<br>
+										<br> <label id="fileUpload"> 사진선택<input
+											type="file" name="file" accept="jpg,jpeg,png"
+											style="display: none;">
 										</label>
 									</div>
 								</div>
@@ -136,14 +138,17 @@
 		})
 	</script>
 	<style type="text/css">
-#fileUpload{
-	border:1px solid black;
-	border-radius:5px;
+
+#fileUpload {
+	border: 1px solid black;
+	border-radius: 5px;
 }
-#fileUpload:hover{
-	background-color:black;
-	cursor:pointer;
+
+#fileUpload:hover {
+	background-color: black;
+	cursor: pointer;
 }
+
 button {
 	background-color: transparent;
 	border: 0px;

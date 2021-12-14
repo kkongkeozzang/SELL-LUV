@@ -122,6 +122,30 @@ private static BoardDAO instance = null;
 			}
 	}
 	
+	public List<BoardDTO> selectByBoundSearch(int start, int end, String select, String keyword) throws Exception {
+		String sql = "SELECT * FROM (SELECT ROWNUM rn, freeboard.* FROM freeboard WHERE "+select+ " LIKE ? ORDER BY seq DESC) a WHERE a.rn BETWEEN ? AND ?";
+		try(Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+			pstat.setString(1, "%"+keyword+"%");
+			pstat.setInt(2, start);
+			pstat.setInt(3, end);
+			try(ResultSet rs = pstat.executeQuery();){
+				List<BoardDTO> list = new ArrayList<>();
+				while(rs.next()) {
+					int seq = rs.getInt("seq");
+					String writer = rs.getString("writer");
+					String title = rs.getString("title");
+					String contents = rs.getString("contents");
+					Timestamp write_date = rs.getTimestamp("write_date");
+					int view_count = rs.getInt("view_count");
+					list.add(new BoardDTO(seq,writer,title,contents,write_date,view_count));
+				}
+				return list;
+				}
+			}
+	}
+	
 	public BoardDTO selectBySeq(int seq) throws Exception {
 		String sql = "SELECT * FROM freeboard WHERE seq = ?";
 		try(Connection con = this.getConnection();
@@ -152,6 +176,19 @@ private static BoardDAO instance = null;
 				){
 			rs.next();
 			return rs.getInt(1);
+		}
+	}
+	
+	private int getRecordCountSearch(String select, String keyword) throws Exception {
+		String sql = "SELECT COUNT(*) FROM freeboard WHERE "+select+" LIKE ? ";
+		try(Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);
+				){
+			pstat.setString(1, "%"+keyword+"%");
+			try(ResultSet rs = pstat.executeQuery();){
+				rs.next();
+				return rs.getInt(1);
+			}
 		}
 	}
 	
@@ -210,7 +247,60 @@ private static BoardDAO instance = null;
 		return navi;
 	}
 	
-	
+public String getPageNaviSearch(int cpage, String select, String keyword) throws Exception {
+		
+		// 변수 설정
+		int recordTotalCount = this.getRecordCountSearch(select, keyword);
+		int recordCountPerPage = BoardStatics.RECORD_COUNT_PER_PAGE;
+		int naviCountPerPage = BoardStatics.NAVI_PER_PAGE;
+		int pageTotalCount = 0;
+		
+		// pageTotalCount 계산
+		if(recordTotalCount % recordCountPerPage == 0) {
+			pageTotalCount = recordTotalCount / recordCountPerPage;
+		}else {
+			pageTotalCount = recordTotalCount / recordCountPerPage +1;
+		}
+		
+		// 네비 시작, 끝 정해주기
+		int startNavi = (cpage-1)/naviCountPerPage * naviCountPerPage +1;
+		int endNavi = startNavi + (naviCountPerPage - 1);
+		
+		if(endNavi>pageTotalCount) {
+			endNavi = pageTotalCount;
+		}
+		
+		boolean needPrev = true;
+		boolean needNext = true;
+		
+		if(startNavi==1) {
+			needPrev = false;
+		}
+		if(endNavi==pageTotalCount) {
+			needNext = false;
+		}
+		
+		String navi ="";
+		navi+= "<nav><ul class='pagination mb-5 justify-content-center'>";
+		if(needPrev) {
+			navi += "<li class=page-item><a class=page-link href='/search.board?cpage="+(startNavi-1)+"' data-abc=true>"+"«"+"</a></li>";
+		}
+		for(int i=startNavi;i<=endNavi;i++) {
+			navi += "<li class=page-item><a class=page-link href='/search.board?cpage="+i+"' data-abc=true>"+i+"</a></li>";
+		}
+		if(needNext) {
+			navi += "<li class=page-item><a class=page-link href='/search.board?cpage="+(endNavi+1)+"' data-abc=true>"+"»"+"</a></li>";
+		}
+		navi+="</ul></nav>";
+		
+//		 System.out.println("startNavi : "+startNavi);
+//		 System.out.println("endNavi : "+endNavi);
+//		 System.out.println("recordTotalCount : "+recordTotalCount);
+//		 System.out.println("pageTotalCount : "+pageTotalCount);
+		 
+		
+		return navi;
+	}
 	
 	
 	

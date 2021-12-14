@@ -145,34 +145,4 @@ public class InfluencerDTO {
    }
 
 
-   public void setGrade(String grade) {
-      this.grade = grade;
-   }
-
-   public String getPwAsk() {
-      return pwAsk;
-   }
-
-   public void setPwAsk(String pwAsk) {
-      this.pwAsk = pwAsk;
-   }
-
-   public String getPwAnswer() {
-      return pwAnswer;
-   }
-
-   public void setPwAnswer(String pwAnswer) {
-      this.pwAnswer = pwAnswer;
-   }
-
-   public String getFavorite() {
-      return favorite;
-   }
-
-   public void setFavorite(String favorite) {
-      this.favorite = favorite;
-   }
-   
-
-   
 }

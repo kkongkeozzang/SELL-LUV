@@ -84,7 +84,7 @@
 						<ul class="list-inline shop-top-menu pb-3 pt-1">
 							<li class="list-inline-item"><a
 								class="h3 text-dark text-decoration-none mr-3"
-								href="/listSortByGrade.ifcp?object=${list[1]}">등급</a></li>
+								href="/companyList.ifcp">등급</a></li>
 							<li class="list-inline-item"><a
 								class="h3 text-dark text-decoration-none mr-3" href="#">리뷰</a></li>
 								<c:if test="${loginID != null && cp != null}">
@@ -105,14 +105,14 @@
 							<div class="card mb-4 product-wap rounded-0">
 								<div class="card rounded-0">
 									<img id="img" class="card-img rounded-0 img-fluid"
-										src=${dto.photo }>
+										src=${dto.key.photo_cp }>
 								</div>
-								<div class="card-body">
-									<a href="/searchDetail.ifcp?seq=${dto.seq}&object=${list[1]}"
-										class="h3 text-decoration-none">${dto.name}</a>
+								<div class="card-body">${dto.key.seq_cp}
+									<a href="/companyBoard.ifcp?seq=${dto.key.seq_cp}"
+										class="h3 text-decoration-none">${dto.key.title_cp}</a>
 									<ul
 										class="w-100 list-unstyled d-flex justify-content-between mb-0">
-										<li>${dto.grade }</li>
+										<li>${dto.value.grade }</li>
 										<li class="pt-2"><span
 											class="product-color-dot color-dot-red float-left rounded-circle ml-1"></span>
 											<span
@@ -132,7 +132,7 @@
 											class="text-muted fa fa-star"></i> <i
 											class="text-muted fa fa-star"></i></li>
 									</ul>
-									<p class="text-center mb-0">${dto.grade }</p>
+									<p class="text-center mb-0">${dto.value.grade }</p>
 								</div>
 							</div>
 						</div>

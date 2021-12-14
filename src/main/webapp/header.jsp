@@ -69,7 +69,7 @@
                     <c:choose>
                     	<c:when test="${loginID == null }">
                     	 <li class="nav-item">
-                    		<a class="btn-solid-sm" href="/resources/login/login.jsp" style="background-color: #000000;border:none;">로그인</a>
+                    		<a class="btn-solid-sm" href="/login.mem" style="background-color: #000000;border:none;">로그인</a>
                     	</li>
                     	</c:when>
                     	<c:when test="${loginID eq 'kkanbu' }">

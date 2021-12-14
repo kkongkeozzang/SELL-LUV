@@ -5,7 +5,6 @@ public class Profile_IfDTO {
 	private int member_seq;
 	private String condition_if;
 	private String career_if;
-	private String sns_if;
 	private String intro_if;
 	private int sLike_if;
 	private int rLike_if;
@@ -16,14 +15,13 @@ public class Profile_IfDTO {
 	}
 
 
-	public Profile_IfDTO(int seq_if, int member_seq, String condition_if, String career_if, String sns_if,
-			String intro_if, int sLike_if, int rLike_if) {
+	public Profile_IfDTO(int seq_if, int member_seq, String condition_if, String career_if, String intro_if,
+			int sLike_if, int rLike_if) {
 		super();
 		this.seq_if = seq_if;
 		this.member_seq = member_seq;
 		this.condition_if = condition_if;
 		this.career_if = career_if;
-		this.sns_if = sns_if;
 		this.intro_if = intro_if;
 		this.sLike_if = sLike_if;
 		this.rLike_if = rLike_if;
@@ -70,16 +68,6 @@ public class Profile_IfDTO {
 	}
 
 
-	public String getSns_if() {
-		return sns_if;
-	}
-
-
-	public void setSns_if(String sns_if) {
-		this.sns_if = sns_if;
-	}
-
-
 	public String getIntro_if() {
 		return intro_if;
 	}
@@ -108,5 +96,6 @@ public class Profile_IfDTO {
 	public void setrLike_if(int rLike_if) {
 		this.rLike_if = rLike_if;
 	}
+
 	
 }

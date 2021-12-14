@@ -89,6 +89,27 @@ public class BoardController extends HttpServlet {
 				int result = bdao.delete(Integer.parseInt(seq));
 				System.out.println("삭제 결과 : " + result);
 				response.sendRedirect("/boardList.board?cpage="+cpage);
+			}else if(cmd.equals("/search.board")) {
+				String select = request.getParameter("select");
+				String keyword = request.getParameter("keyword");
+				if(keyword==null) {
+					response.sendRedirect("boardList.board?cpage="+cpage);
+				}else {
+					System.out.println("select : " + select);
+					System.out.println("keyword : " +keyword);
+					int currentPage = Integer.parseInt(cpage);
+					int start = currentPage * BoardStatics.RECORD_COUNT_PER_PAGE-9;
+					int end = currentPage * BoardStatics.RECORD_COUNT_PER_PAGE;
+					List<BoardDTO> boardList = bdao.selectByBoundSearch(start,end,select,keyword);
+					String navi = bdao.getPageNaviSearch(currentPage,select,keyword);
+					String noSearch = "검색 결과가 없습니다.";
+					if(boardList.size()==0) {
+						request.setAttribute("noSearch", noSearch);
+					}
+					request.setAttribute("boardList", boardList);
+					request.setAttribute("navi", navi);
+					request.getRequestDispatcher("/resources/board/boardSearch.jsp?cpage="+cpage).forward(request, response);
+				}
 			}
 			
 		}catch(Exception e) {
