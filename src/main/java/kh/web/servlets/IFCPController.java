@@ -147,11 +147,23 @@ public class IFCPController extends HttpServlet {
 				MultipartRequest multi = new MultipartRequest(request, savePath, maxSize, "UTF8", new DefaultFileRenamePolicy());
 
 				String oriName = multi.getOriginalFileName("file");
-				String sysName = multi.getFilesystemName("file"); 
-
-				companyDAO.insertPhoto(new Photo_ListDTO(0,oriName,sysName,0));
+				String sysName = multi.getFilesystemName("file");
 				
-				response.sendRedirect("index.jsp");
+				if(oriName==null) { // 사진 안올릴시 작성글만 올리기.
+					String title = multi.getParameter("title");
+					String intro = multi.getParameter("intro");
+					String condition = multi.getParameter("condition");
+					companyDAO.writeIntro(title, intro, condition);
+					response.sendRedirect("/companyList.ifcp?cpage=1");
+				}else { // 사진까지 올리기.
+					companyDAO.insertPhoto(new Photo_ListDTO(0,oriName,sysName,0));
+					
+					String title = multi.getParameter("title");
+					String intro = multi.getParameter("intro");
+					String condition = multi.getParameter("condition");
+					companyDAO.writeIntro(title, intro, condition);
+					response.sendRedirect("/companyList.ifcp?cpage=1");
+				}
 			}
 			
 		}catch(Exception e) {

@@ -168,7 +168,7 @@ public class CompanyDAO {
 	//====================================================================================================================================
 
 	public List<Board_CpDTO> cpCardSearch(int seq) throws Exception { // 기업 10개씩 뽑아오는 코드.
-		String sql = "select * from board_cp where seq_cp=?";
+		String sql = "select * from board_cp where seq_board_cp=?";
 		try(Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);){
 			pstat.setInt(1, seq);
@@ -279,13 +279,28 @@ public class CompanyDAO {
 	}
 	
 	public int insertPhoto(Photo_ListDTO dto) throws Exception { // 사진 업로드
-		String sql = "insert into files values(files_seq.nextval,?,?,?)";
+		String sql = "insert into photo_list values(photo_list_seq.nextval,?,?,?)";
 		try(Connection con = this.getConnection();
 				PreparedStatement pstat = con.prepareStatement(sql);){
 			pstat.setString(1, dto.getOriName());
 			pstat.setString(2, dto.getSysName());
 			pstat.setInt(3, dto.getParentSeq());
 			int result = pstat.executeUpdate();
+			con.setAutoCommit(false);
+			con.commit();
+			return result;
+		}
+	}
+	
+	public int writeIntro(String title,String intro,String condition) throws Exception { // 글 업로드
+		String sql = "insert into board_cp (seq_board_cp,title_cp,intro_cp,condition_cp) values(board_cp_seq.nextval,?,?,?)";
+		try(Connection con = this.getConnection();
+				PreparedStatement pstat = con.prepareStatement(sql);){
+			pstat.setString(1, title);
+			pstat.setString(2, intro);
+			pstat.setString(3, condition);
+			int result = pstat.executeUpdate();
+			con.setAutoCommit(false);
 			con.commit();
 			return result;
 		}
