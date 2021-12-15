@@ -40,17 +40,23 @@ public class MemberController extends HttpServlet {
 				String pw = sha512.generate(request.getParameter("pw_if"));
 				
 				boolean result = influencerDAO.login(id, pw);
-				System.out.println(id+pw);
+				int result2 = influencerDAO.findSeq(id,pw);
+				String seq = String.valueOf(result2);
+				
+				System.out.println(id+pw+seq);
 				
 				if(result) {
+					
 					HttpSession session = request.getSession();
 					session.setAttribute("loginID", id);
+					session.setAttribute("IDseq", seq);
 					
 					System.out.println("logged in!");
 		
 					response.sendRedirect("/index.jsp");
 					
 				}else if(!result) {
+					
 					String errorMessage = "정확한 정보를 입력하세요..";
 
 					request.setAttribute("errorMessage", errorMessage);
@@ -69,13 +75,18 @@ public class MemberController extends HttpServlet {
 
 				boolean result = companyDAO.login(id, pw);
 
-				System.out.println(id + " " + pw + result);
 				String idResult = String.valueOf(result);
+	
+				int result2 = companyDAO.findSeq(id,pw);
+				String seq = String.valueOf(result2);
+				
+				System.out.println(id+pw+"   "+seq);
 
 				if(result) {
 					HttpSession session = request.getSession();
 					session.setAttribute("loginID", id);
-					System.out.println( id+ "logged in!");
+					session.setAttribute("IDseq", seq);
+					System.out.println( id + " " + seq + "logged in!");
 					response.sendRedirect("/index.jsp");
 
 				}else if(!result) {

@@ -108,7 +108,7 @@
 										src=${dto.key.photo_cp }>
 								</div>
 								<div class="card-body">${dto.key.seq_cp}
-									<a href="/companyBoard.ifcp?seq=${dto.key.seq_cp}"
+									<a href="/companyBoard.ifcp?seq=${dto.key.seq_cp}&cpage=1"
 										class="h3 text-decoration-none">${dto.key.title_cp}</a>
 									<ul
 										class="w-100 list-unstyled d-flex justify-content-between mb-0">

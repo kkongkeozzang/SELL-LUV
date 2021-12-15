@@ -70,33 +70,41 @@
 						</div>
 
 					</article>
-					
+
 					<div class="contact-form article-comment">
 						<h4>리뷰 목록</h4>
 						<div class="row">
 							<div class="col-md-6">
-							<table class="table-sm mb-0" style="color:#ff6F61;">
-								<thead>
-									<tr>
-										<th>번호</th>
-										<th>작성자</th>
-										<th>작성내용</th>
-										<th>작성시간</th>
-									</tr>
-								</thead>
-								<tbody>
-								<c:forEach var="list" items="${list}">
-									<tr style="color:black;">
-										<td>${list }</td>
-										<td>dddddddddddddddd</td>
-										<td>dddddddddddd</td>
-										<td>ddddddddddddddddddd</td>
-									</tr>
-									</c:forEach>
-								</tbody>
-							</table>
+								<table class="table-sm mb-0" width="450px; "
+									style="color: #ff6F61;">
+									<thead>
+										<tr>
+											<th>번호</th>
+											<th>작성자</th>
+											<th>작성내용</th>
+											<th>작성시간</th>
+										</tr>
+									</thead>
+									<tbody>
+										<c:forEach var="list" items="${ifRvList}">
+											<c:if test="${dto.value.id==list.name_ref }">
+												<tr style="color: black;">
+													<td>${list.seq }</td>
+													<td>${list.writer }</td>
+													<td>${list.content }</td>
+													<td>${list.timestamp }</td>
+												</tr>
+											</c:if>
+										</c:forEach>
+									</tbody>
+								</table>
 							</div>
 						</div>
+					<div div="row">
+						<ul class="pagination pagination-lg justify-content-end">
+							${navi }
+						</ul>
+					</div>
 					</div>
 				</div>
 				<div class="col-lg-4 m-15px-tb blog-aside">
@@ -106,7 +114,9 @@
 							<div class="media align-items-center">
 								<div class="media-body">
 									<div class="nav tag-cloud">
-										<a href="#" style="text-decoration: none;">깐부맺기</a>
+										<a
+											href="/kkanbuRequestToCompany.kkanbu?kkanbuReceiveSeq=${dto.key.member_seq }&kkanbuSendSeq=${IDseq}"
+											style="text-decoration: none;">깐부맺기</a>
 									</div>
 								</div>
 							</div>
@@ -116,24 +126,14 @@
 
 					<!-- Latest Post -->
 					<div class="widget widget-latest-post">
-						<div class="widget-title">
-							<h3>
-								받은 좋아요 <i class="fas fa-heart" id="heart"></i>
-								${dto.key.rLike_cp}
-							</h3>
-						</div>
-						<div class="widget-title">
-							<h3>
-								보낸 좋아요 <i class="fas fa-heart" id="heart"></i>
-								${dto.key.sLike_cp}
-							</h3>
-						</div>
 						</c:forEach>
-						<div class="widget-title">
-							<c:if test="${loginID!=null && cpList[0].value.id == loginID}">
-								<a href="/iFdelete.ifcp?seq=${cpList[0].key.seq_cp}"><button
-										type="button">삭제하기</button></a>
-							</c:if>
+						<div class="widget-title" style="text-align: center;">
+							<c:forEach var="dto" items="${cpList }">
+								<c:if test="${loginID eq dto.value.id}">
+									<a href="/iFdelete.ifcp?seq=${cpList[0].key.seq_cp}"><button
+											type="button" id="delBtn">삭제하기</button></a>
+								</c:if>
+							</c:forEach>
 						</div>
 					</div>
 				</div>
@@ -145,6 +145,17 @@
 		
 	</script>
 	<style type="text/css">
+#delBtn {
+	color: #ff6F61;
+	background-color: transparent;
+	border: 1px solid black;
+	border-radius: 5px;
+}
+
+#delBtn:hover {
+	background-color: black;
+}
+
 #heart {
 	color: red;
 }

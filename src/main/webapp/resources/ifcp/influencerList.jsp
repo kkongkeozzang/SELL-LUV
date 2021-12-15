@@ -107,7 +107,7 @@
 									<img id="img" class="card-img rounded-0 img-fluid"
 										src=${dto.value.photo }>
 								</div>
-								<div class="card-body">
+								<div class="card-body">${dto.key.career_if} ${dto.key.seq_if} ${dto.value.seq }
 									<a href="/influencerProfile.ifcp?seq=${dto.key.seq_if}"
 										class="h3 text-decoration-none">${dto.value.name}</a>
 									<ul

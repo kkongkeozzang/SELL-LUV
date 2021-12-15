@@ -304,9 +304,9 @@ body {
 										<thead>
 											<tr>
 												<th class="type"></th>
-												<th class="name truncate">Name</th>
-												<th class="date">Uploaded</th>
-												<th class="size">Size</th>
+												<th class="name truncate">깐부아이디.</th>
+												<th class="date">날짜.</th>
+												<th class="size">수락/거절./<!--  --></th>
 											</tr>
 										</thead>
 										<tbody>
@@ -318,23 +318,23 @@ body {
 												<td class="date">Sep 23, 2015</td>
 												<td class="size">18 KB</td>
 											</tr>
-											<tr>
+										<!-- 	<tr>
 												<td class="type"><i
 													class="fa fa-file-image-o text-primary"></i></td>
 												<td class="name truncate"><a href="#">Stock Image
 														DC3214.JPG</a></td>
 												<td class="date">Sep 21, 2015</td>
 												<td class="size">235 MB</td>
-											</tr>
-											<tr>
+											</tr> -->
+										<!-- 	<tr>
 												<td class="type"><i
 													class="fa fa-file-powerpoint-o text-warning"></i></td>
 												<td class="name truncate"><a href="#">Deck Lorem
 														Ipsum.ppt</a></td>
 												<td class="date">Sep 20, 2015</td>
 												<td class="size">136 MB</td>
-											</tr>
-											<tr>
+											</tr> -->
+											<!-- <tr>
 												<td class="type"><i
 													class="fa fa-file-excel-o text-success"></i></td>
 												<td class="name truncate"><a href="#">Project
@@ -390,22 +390,22 @@ body {
 														imperdiet.doc</a></td>
 												<td class="date">Oct 16, 2014</td>
 												<td class="size">23 KB</td>
-											</tr>
-											<tr>
-												<td class="type"><i
-													class="fa fa-file-code-o text-primary"></i></td>
+											</tr> -->
+											<!-- <tr>
+												<td class="type"> <i
+													class="fa fa-file-code-o text-primary"> </i></td>
 												<td class="name truncate"><a href="#">demo.html</a></td>
 												<td class="date">Aug 23, 2014</td>
 												<td class="size">10 KB</td>
-											</tr>
-											<tr>
+											</tr> -->
+											<!-- <tr>
 												<td class="type"><i
 													class="fa fa-file-image-o text-success"></i></td>
 												<td class="name truncate"><a href="#">Image
 														DS2314.JPG</a></td>
 												<td class="date">Aug 06, 2014</td>
 												<td class="size">325 MB</td>
-											</tr>
+											</tr> -->
 										</tbody>
 									</table>
 								</div>

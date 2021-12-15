@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kh.web.dao.ReviewDAO;
-import kh.web.dto.ReviewDTO;
+import kh.web.dto.Review_CpDTO;
 
 
 @WebServlet("*.review")

@@ -1,7 +1,7 @@
 package kh.web.dto;
 
 public class Profile_IfDTO {
-	private int seq_if;
+	private int	p_seq_if;
 	private int member_seq;
 	private String condition_if;
 	private String career_if;
@@ -18,7 +18,7 @@ public class Profile_IfDTO {
 	public Profile_IfDTO(int seq_if, int member_seq, String condition_if, String career_if, String intro_if,
 			int sLike_if, int rLike_if) {
 		super();
-		this.seq_if = seq_if;
+		this.p_seq_if = seq_if;
 		this.member_seq = member_seq;
 		this.condition_if = condition_if;
 		this.career_if = career_if;
@@ -29,12 +29,12 @@ public class Profile_IfDTO {
 
 
 	public int getSeq_if() {
-		return seq_if;
+		return p_seq_if;
 	}
 
 
 	public void setSeq_if(int seq_if) {
-		this.seq_if = seq_if;
+		this.p_seq_if = seq_if;
 	}
 
 
